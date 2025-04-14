@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class AdminLog extends Model
+{
+    protected $fillable = [
+        'admin_id',
+        'action',
+        'target_table',
+        'target_id',
+        'metadata',
+    ];
+
+    protected $casts = [
+        'metadata' => 'array',
+        'created_at' => 'datetime'
+    ];
+    
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+}
